@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import "./globals.css";
+import { Layout } from "@/components/Layout/Layout";
+import React from "react";
 
 export const metadata: Metadata = {
     title: "nextjs-template",
@@ -15,7 +17,9 @@ export default function RootLayout({
     return (
         <html lang="zh-CN">
             <body>
-                <AntdRegistry>{children}</AntdRegistry>
+                <AntdRegistry>
+                    <Layout>{children}</Layout>
+                </AntdRegistry>
             </body>
         </html>
     );
