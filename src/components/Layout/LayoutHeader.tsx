@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Space } from "antd";
+import Link from "next/link";
 
 // LOGO
 const HeaderLogo = () => {
@@ -16,7 +17,6 @@ const HeaderLogo = () => {
 
 // 菜单
 const HeaderMenu = () => {
-    const router = useRouter();
     const pathname = usePathname();
 
     const menus = [
@@ -28,12 +28,13 @@ const HeaderMenu = () => {
     return (
         <Space size="large" className="ml-a">
             {menus.map((item, index) => (
-                <div
+                <Link
                     key={index}
-                    className={`text-16px ${pathname === item.path ? "c-#1890ff" : "c-#333"} cursor-pointer transition hover:c-#1890ff`}
+                    className={`block text-16px ${pathname === item.path ? "c-#1890ff" : "c-#333"} cursor-pointer transition hover:c-#1890ff`}
+                    href={item.path}
                 >
                     {item.name}
-                </div>
+                </Link>
             ))}
         </Space>
     );

@@ -1,7 +1,7 @@
 const Home: React.FC = () => {
     let arr = Array.from({ length: 10000 }, (v, i) => i + 1);
     return (
-        <div>
+        <div className="page-container py">
             {arr.map((item, index) => {
                 return <div key={index}>{item}</div>;
             })}
