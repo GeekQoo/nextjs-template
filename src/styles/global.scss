@@ -1,0 +1,12 @@
+//unocss
+@import "@unocss/reset/tailwind.css";
+@unocss all;
+
+// 动画
+@import "./transition.scss";
+
+// 全局样式
+.page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
