@@ -19,7 +19,7 @@ export default function RootLayout({
             <body>
                 <AntdRegistry>
                     <LayoutHeader />
-                    <div>{children}</div>
+                    <div className="pt-60px">{children}</div>
                 </AntdRegistry>
             </body>
         </html>

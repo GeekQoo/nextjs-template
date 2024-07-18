@@ -21,11 +21,13 @@ export const LayoutHeader: React.FC = () => {
 
         const handleScroll = () => {
             let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
             if (scrollTop > lastScrollTop) {
                 setHeaderAnimation("translate-y--60px");
             } else {
                 setHeaderAnimation("translate-y-none");
             }
+
             lastScrollTop = scrollTop;
         };
         window.addEventListener("scroll", handleScroll);
