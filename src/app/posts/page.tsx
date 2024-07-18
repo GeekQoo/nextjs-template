@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "关于我们",
+    title: "新闻资讯",
     description: "一个Next.js快速启动模板"
 };
 
-const About: React.FC = () => {
+const Posts: React.FC = () => {
     return (
         <div className="page-container py">
-            <h1>关于我们</h1>
-            <p>这是一个关于我们页面</p>
+            <h1>新闻资讯</h1>
+            <p>这是一个新闻资讯页面</p>
         </div>
     );
 };
 
-export default About;
+export default Posts;

@@ -5,7 +5,7 @@ const Home: React.FC = () => {
     return (
         <div>
             <CommonBanner />
-            <CommonImageText />
+            <CommonImageText title="图文模块/视频文模块" />
         </div>
     );
 };

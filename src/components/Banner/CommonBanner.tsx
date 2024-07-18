@@ -2,7 +2,7 @@ import { Button, Carousel } from "antd";
 import banner1 from "@/assets/images/banner/banner-1.jpg";
 import banner2 from "@/assets/images/banner/banner-2.jpg";
 
-interface CommonBannerProps {
+interface Props {
     className?: string;
     height?: number;
     autoplay?: boolean;
@@ -11,7 +11,7 @@ interface CommonBannerProps {
     draggable?: boolean;
 }
 
-export const CommonBanner: React.FC<CommonBannerProps> = ({
+export const CommonBanner: React.FC<Props> = ({
     className = "",
     arrows = false,
     autoplay = true,

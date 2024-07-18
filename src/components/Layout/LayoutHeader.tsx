@@ -10,7 +10,7 @@ export const LayoutHeader: React.FC = () => {
 
     const menus = [
         { name: "首页", path: "/" },
-        { name: "新闻动态", path: "/news" },
+        { name: "新闻动态", path: "/posts" },
         { name: "关于我们", path: "/about" }
     ];
 
