@@ -2,7 +2,12 @@ import { Button, Result } from "antd";
 
 export default function NotFound() {
     return (
-        <div className="flex-center">
+        <div
+            className="flex-center"
+            style={{
+                height: "calc(100vh - 60px)"
+            }}
+        >
             <Result
                 status="404"
                 title="404"
