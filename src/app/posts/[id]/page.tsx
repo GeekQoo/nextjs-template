@@ -1,22 +1,18 @@
-import { ResProps } from "#/request";
+import type { ResProps } from "#/request";
+import type { RouteParamsProps } from "#/global";
+import type { PostProps } from "@/app/posts/type";
 
-interface Props {
-    params: { id: string };
-}
-
-interface PostProps {
-    id: number;
-    title: string;
-    content: string;
-}
-
-const getPostRes = async (params: { id: string | number }): Promise<ResProps<PostProps>> => {
+const getPostRes = async (params: { id: number }): Promise<ResProps<PostProps>> => {
     const res = await fetch(`http://localhost:3000/article/${params.id}`);
     return await res.json();
 };
 
-const PostDetail: React.FC<Props> = async ({ params }) => {
-    const postRes = await getPostRes({ id: params.id });
+const PostDetail: React.FC<
+    RouteParamsProps<{
+        id: string; // 文章ID
+    }>
+> = async ({ params }) => {
+    const postRes = await getPostRes({ id: Number(params.id) });
     const postItem = postRes.data;
 
     return (

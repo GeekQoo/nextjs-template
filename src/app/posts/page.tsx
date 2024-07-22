@@ -1,32 +1,25 @@
 import type { Metadata } from "next";
-import { PaginationResProps } from "#/request";
 import { Button, Card, Space } from "antd";
 import Link from "next/link";
+import type { PaginationResProps } from "#/request";
+import type { PageParamsProps, SearchParamsProps } from "#/global";
+import type { PostProps } from "@/app/posts/type";
 
 export const metadata: Metadata = {
     title: "新闻资讯",
     description: "一个Next.js快速启动模板"
 };
 
-interface Props {
-    params: {};
-    searchParams: {
-        page: number;
-    };
-}
-
-interface PostProps {
-    id: number;
-    title: string;
-    content: string;
-}
-
 const getPostRes = async ({ page = 1, size = 10 }): Promise<PaginationResProps<PostProps>> => {
     const res = await fetch(`http://localhost:3000/article?page=${page}&size=${size}`);
     return await res.json();
 };
 
-const Posts: React.FC<Props> = async ({ params, searchParams }) => {
+const Posts: React.FC<
+    SearchParamsProps<{
+        page: number; // 当前页码
+    }>
+> = async ({ searchParams }) => {
     const page = searchParams.page || 1;
 
     const postRes = await getPostRes({ page, size: 10 });
