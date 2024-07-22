@@ -49,7 +49,7 @@ export const LayoutHeader: React.FC = () => {
                     {menus.map((item, index) => (
                         <Link
                             key={index}
-                            className={`block text-16px ${pathname === item.path ? "c-#1890ff" : "c-#333"} cursor-pointer transition hover:c-#1890ff`}
+                            className={`block text-16px ${pathname === item.path || (pathname.includes(item.path) && item.path !== "/") ? "c-#1890ff" : "c-#333"} cursor-pointer transition hover:c-#1890ff`}
                             href={item.path}
                         >
                             {item.name}
