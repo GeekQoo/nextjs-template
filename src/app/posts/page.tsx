@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Button, Card, Space } from "antd";
 import Link from "next/link";
 import type { PaginationResProps } from "#/request";
-import type { PageParamsProps, SearchParamsProps } from "#/global";
+import type { SearchParamsProps } from "#/global";
 import type { PostProps } from "@/app/posts/type";
 
 export const metadata: Metadata = {
@@ -29,10 +29,19 @@ const Posts: React.FC<
         <div className="page-container py">
             {(postRes.data?.list ?? []).map((item, index) => (
                 <Card hoverable className="mb!" key={index}>
-                    <Link href={`/posts/${item.id}`} className="text-20px c-#333">
-                        {item.title}
-                    </Link>
-                    <div className="mt">{item.content}</div>
+                    <div className="flex">
+                        {item.thumbnail && (
+                            <div className="mr flex-fixed-320 h-180px" style={{}}>
+                                <img className="block wh-100%  object-cover" src={item.thumbnail} />
+                            </div>
+                        )}
+                        <div>
+                            <Link href={`/posts/${item.id}`} className="text-20px c-#333">
+                                {item.title}
+                            </Link>
+                            <div className="mt">{item.summary}</div>
+                        </div>
+                    </div>
                 </Card>
             ))}
             <div className="flex-center pt">

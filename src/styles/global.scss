@@ -9,9 +9,21 @@
 body {
     width: 100%;
     min-width: 1200px;
+    background: #f2f2f2;
 }
 
 .page-container {
     max-width: 1200px;
     margin: 0 auto;
+}
+
+//富文本样式
+.richText-container {
+    p {
+        margin-top: 16px;
+
+        &:first-child {
+            margin-top: 0;
+        }
+    }
 }

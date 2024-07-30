@@ -1,6 +1,7 @@
 import type { ResProps } from "#/request";
 import type { RouteParamsProps } from "#/global";
 import type { PostProps } from "@/app/posts/type";
+import { Card } from "antd";
 
 const getPostRes = async (params: { id: number }): Promise<ResProps<PostProps>> => {
     const res = await fetch(`http://localhost:3000/article/${params.id}`);
@@ -17,8 +18,10 @@ const PostDetail: React.FC<
 
     return (
         <div className="page-container py">
-            <h1>{postItem?.title}</h1>
-            <div className="mt" dangerouslySetInnerHTML={{ __html: postItem?.content! }}></div>
+            <Card hoverable>
+                <h1 className="text-24px font-bold">{postItem?.title}</h1>
+                <div className="mt richText-container" dangerouslySetInnerHTML={{ __html: postItem?.content! }}></div>
+            </Card>
         </div>
     );
 };
