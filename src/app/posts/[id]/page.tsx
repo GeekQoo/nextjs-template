@@ -18,7 +18,7 @@ const PostDetail: React.FC<
     return (
         <div className="page-container py">
             <h1>{postItem?.title}</h1>
-            <p className="mt">{postItem?.content}文章页面</p>
+            <div className="mt" dangerouslySetInnerHTML={{ __html: postItem?.content! }}></div>
         </div>
     );
 };
