@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { Button, Card, Space } from "antd";
+import { Button, Card, Space, Tag } from "antd";
 import Link from "next/link";
 import type { PaginationResProps } from "#/request";
 import type { SearchParamsProps } from "#/global";
 import type { PostProps } from "@/app/posts/type";
+import dayjs from "dayjs";
 
 export const metadata: Metadata = {
     title: "新闻资讯",
@@ -29,17 +30,25 @@ const Posts: React.FC<
         <div className="page-container py">
             {(postRes.data?.list ?? []).map((item, index) => (
                 <Card hoverable className="mb!" key={index}>
-                    <div className="flex">
+                    <div className="flex ">
                         {item.thumbnail && (
-                            <div className="mr flex-fixed-320 h-180px" style={{}}>
+                            <Link href={`/posts/${item.id}`} className="block mr flex-fixed-320 h-180px">
                                 <img className="block wh-100%  object-cover" src={item.thumbnail} />
-                            </div>
+                            </Link>
                         )}
-                        <div>
+                        <div className="relative">
                             <Link href={`/posts/${item.id}`} className="text-20px c-#333">
                                 {item.title}
                             </Link>
-                            <div className="mt">{item.summary}</div>
+                            <Link href={`/posts/${item.id}`} className="block mt text-14px c-#333">
+                                {item.summary}
+                            </Link>
+                            <div className="absolute-bl w-100% flex-y-center">
+                                <Tag color="success">{item.category?.categoryName}</Tag>
+                                <div className="ml-a text-12px c-#999">
+                                    发布于{dayjs(item.createdAt).format("YYYY-MM-DD ")}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </Card>

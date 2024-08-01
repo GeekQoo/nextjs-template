@@ -19,11 +19,43 @@ body {
 
 //富文本样式
 .richText-container {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
     p {
-        margin-top: 16px;
+        margin-bottom: 16px;
+    }
 
-        &:first-child {
-            margin-top: 0;
-        }
+    h1 {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    h2 {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    h3 {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    h4 {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    h5 {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    h6 {
+        font-size: 12px;
+        font-weight: bold;
     }
 }
