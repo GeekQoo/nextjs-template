@@ -27,7 +27,7 @@ export default function RootLayout({
                     >
                         {children}
                     </div>
-                    <LayoutFooter />
+                    <LayoutFooter theme="dark" />
                 </AntdRegistry>
             </body>
         </html>
