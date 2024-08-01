@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
-import { LayoutHeader } from "@/components/Layout";
+import { LayoutHeader, LayoutFooter } from "@/components/Layout";
 import "@/styles/global.scss";
 
 export const metadata: Metadata = {
@@ -20,6 +20,7 @@ export default function RootLayout({
                 <AntdRegistry>
                     <LayoutHeader />
                     <div className="pt-60px">{children}</div>
+                    <LayoutFooter />
                 </AntdRegistry>
             </body>
         </html>
