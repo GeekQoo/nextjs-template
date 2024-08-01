@@ -19,7 +19,14 @@ export default function RootLayout({
             <body>
                 <AntdRegistry>
                     <LayoutHeader />
-                    <div className="pt-60px">{children}</div>
+                    <div
+                        className="pt-60px"
+                        style={{
+                            minHeight: "calc(100vh - 270px)"
+                        }}
+                    >
+                        {children}
+                    </div>
                     <LayoutFooter />
                 </AntdRegistry>
             </body>
