@@ -27,6 +27,24 @@ const Posts: React.FC<SearchParamsProps<{ page: number }>> = async ({ searchPara
 
     if (!postRes) return <div className="page-container py">请求异常，请刷新后重试</div>;
 
+    const tagColors = [
+        "processing",
+        "success",
+        "error",
+        "warning",
+        "magenta",
+        "red",
+        "volcano",
+        "orange",
+        "gold",
+        "lime",
+        "green",
+        "cyan",
+        "blue",
+        "geekblue",
+        "purple"
+    ];
+
     return (
         <div className="page-container py">
             {(postRes.list ?? []).map((item, index) => (
@@ -45,8 +63,15 @@ const Posts: React.FC<SearchParamsProps<{ page: number }>> = async ({ searchPara
                                 {item.summary}
                             </Link>
                             <div className="absolute-bl w-100% flex-y-center">
-                                <Tag color="success">{item.category?.categoryName}</Tag>
-                                <div className="ml-a text-12px c-#999">
+                                <Space className="mr-a">
+                                    {(item.tags ?? []).map((item, index) => (
+                                        <Tag className="m-0!" key={index} color={tagColors[index % tagColors.length]}>
+                                            {item.tagName}
+                                        </Tag>
+                                    ))}
+                                </Space>
+                                <div className="text-12px c-#333">{item.category?.categoryName}</div>
+                                <div className="ml text-12px c-#999">
                                     发布于{dayjs(item.createdAt).format("YYYY-MM-DD ")}
                                 </div>
                             </div>

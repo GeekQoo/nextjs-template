@@ -9,4 +9,8 @@ export interface PostProps {
         id: number;
         categoryName: string;
     };
+    tags: {
+        id: number;
+        tagName: string;
+    }[];
 }
