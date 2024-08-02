@@ -5,30 +5,31 @@ import type { PaginationResProps } from "#/request";
 import type { SearchParamsProps } from "#/global";
 import type { PostProps } from "@/app/posts/type";
 import dayjs from "dayjs";
+import { GET_POST_LIST } from "@/api/posts";
 
 export const metadata: Metadata = {
     title: "新闻资讯",
     description: "一个Next.js快速启动模板"
 };
 
-const getPostRes = async ({ page = 1, size = 10 }): Promise<PaginationResProps<PostProps>> => {
-    const res = await fetch(`http://localhost:3000/article?page=${page}&size=${size}`);
-    return await res.json();
+const getPostRes = async ({ page = 1, size = 10 }) => {
+    const res = await GET_POST_LIST<PaginationResProps<PostProps>>({ page, size });
+    if (res.data.code === 0 && res.data.data) {
+        return res.data.data;
+    } else {
+        return null;
+    }
 };
 
-const Posts: React.FC<
-    SearchParamsProps<{
-        page: number; // 当前页码
-    }>
-> = async ({ searchParams }) => {
+const Posts: React.FC<SearchParamsProps<{ page: number }>> = async ({ searchParams }) => {
     const page = searchParams.page || 1;
-
     const postRes = await getPostRes({ page, size: 10 });
-    const postPagination = postRes.data?.pagination;
+
+    if (!postRes) return <div className="page-container py">请求异常，请刷新后重试</div>;
 
     return (
         <div className="page-container py">
-            {(postRes.data?.list ?? []).map((item, index) => (
+            {(postRes.list ?? []).map((item, index) => (
                 <Card hoverable className="mb!" key={index}>
                     <div className="flex ">
                         {item.thumbnail && (
@@ -59,13 +60,20 @@ const Posts: React.FC<
                         上一页
                     </Button>
                     <Space>
-                        <div>第{postPagination?.page}页</div>
+                        <div>第{postRes.pagination.page}页</div>
                         <div>/</div>
-                        <div>共{postPagination && Math.ceil(postPagination.total / postPagination.size)}页</div>
+                        <div>
+                            共{postRes.pagination && Math.ceil(postRes.pagination.total / postRes.pagination.size)}页
+                        </div>
                     </Space>
                     <Button
                         type="primary"
-                        disabled={!(postPagination && page < Math.ceil(postPagination.total / postPagination.size))}
+                        disabled={
+                            !(
+                                postRes.pagination &&
+                                page < Math.ceil(postRes.pagination.total / postRes.pagination.size)
+                            )
+                        }
                         href={`/posts?page=${Number(page) + 1}`}
                     >
                         下一页
