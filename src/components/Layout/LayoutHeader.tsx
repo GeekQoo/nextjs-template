@@ -4,8 +4,9 @@ import React, { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Space } from "antd";
 import Link from "next/link";
+import type { SettingsGlobalProps } from "#/settings";
 
-export const LayoutHeader: React.FC = () => {
+export const LayoutHeader: React.FC<{ settings: SettingsGlobalProps[] }> = ({ settings }) => {
     const pathname = usePathname();
 
     const menus = [
@@ -35,6 +36,12 @@ export const LayoutHeader: React.FC = () => {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    // 通过全局配置项key获取value
+    const getValueByKey = (settings: SettingsGlobalProps[], key: string) => {
+        const setting = settings.find((item) => item.key === key);
+        return setting?.value;
+    };
+
     return (
         <div className={`layout-header fixed w-100% z-999 h-60px shadow transition-all-300 bg-#fff ${headerAnimation}`}>
             <div className="page-container flex-y-center">
@@ -43,7 +50,7 @@ export const LayoutHeader: React.FC = () => {
                         className="block h-100%"
                         src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
                     />
-                    <div className="ml-2 text-20px">Next.js template</div>
+                    <div className="ml-2 text-20px">{getValueByKey(settings, "title")}</div>
                 </div>
                 <Space size="large" className="ml-a">
                     {menus.map((item, index) => (

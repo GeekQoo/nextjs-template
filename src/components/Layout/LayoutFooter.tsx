@@ -3,7 +3,8 @@ import { Col, Row, Space } from "antd";
 import dayjs from "dayjs";
 import Link from "next/link";
 import { BilibiliOutlined, QqOutlined, TikTokOutlined, WechatOutlined, WechatWorkOutlined } from "@ant-design/icons";
-import policeIcon from "@/assets/images/icon/beian.png"; // 联系按钮
+import policeIcon from "@/assets/images/icon/beian.png";
+import type { SettingsGlobalProps } from "#/settings";
 
 // 联系按钮
 const ContactButton: React.FC<{
@@ -22,7 +23,16 @@ const ContactButton: React.FC<{
     );
 };
 
-export const LayoutFooter: React.FC<{ theme?: "light" | "dark" }> = ({ theme = "light" }) => {
+export const LayoutFooter: React.FC<{ theme?: "light" | "dark"; settings: SettingsGlobalProps[] }> = ({
+    theme = "light",
+    settings
+}) => {
+    // 通过全局配置项key获取value
+    const getValueByKey = (settings: SettingsGlobalProps[], key: string) => {
+        const setting = settings.find((item) => item.key === key);
+        return setting?.value;
+    };
+
     return (
         <div
             className="layout-footer "
@@ -122,7 +132,7 @@ export const LayoutFooter: React.FC<{ theme?: "light" | "dark" }> = ({ theme = "
                                 color: theme === "light" ? "#333" : "#fff"
                             }}
                         >
-                            Copyright © {dayjs().format("YYYY")} NEXTJS-TEMPLATE
+                            Copyright © {dayjs().format("YYYY")} {getValueByKey(settings, "title")}
                         </div>
                         <Link
                             className="block text-14px"
@@ -132,7 +142,7 @@ export const LayoutFooter: React.FC<{ theme?: "light" | "dark" }> = ({ theme = "
                             target="_blank"
                             href="https://beian.mps.gov.cn/#/query/webSearch"
                         >
-                            测ICP备12345678号-1
+                            {getValueByKey(settings, "beian")}
                         </Link>
                         <Link
                             className=" block text-14px "
@@ -144,7 +154,7 @@ export const LayoutFooter: React.FC<{ theme?: "light" | "dark" }> = ({ theme = "
                         >
                             <div className="flex-y-center">
                                 <img className="h-18px block" src={policeIcon.src} alt="公安备案" />
-                                <div className="ml-1">测公网安备 0123456789123号</div>
+                                <div className="ml-1"> {getValueByKey(settings, "gongan")}</div>
                             </div>
                         </Link>
                     </Space>
