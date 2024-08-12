@@ -1,5 +1,5 @@
 import { CommonBanner } from "@/components/Banner";
-import { SingleLineImageText } from "@/components/ImageText";
+import { CommonImageText, ProductImageText } from "@/components/ImageText";
 import { GET_BANNER_ALL } from "@/api/settings";
 import type { BannerProps } from "#/settings";
 
@@ -10,8 +10,9 @@ const Home: React.FC = async () => {
     return (
         <div>
             {banners && banners.length > 0 && <CommonBanner banners={banners} />}
-            <SingleLineImageText className="bg-#fff" postId={7} />
-            <SingleLineImageText postId={8} />
+            <ProductImageText />
+            <CommonImageText className="bg-#fff" postId={7} />
+            <CommonImageText postId={8} />
         </div>
     );
 };

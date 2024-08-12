@@ -24,7 +24,7 @@ const Image: React.FC<{
     );
 };
 
-export const SingleLineImageText: React.FC<Props> = async ({
+export const CommonImageText: React.FC<Props> = async ({
     postId,
     title = "",
     content = "",

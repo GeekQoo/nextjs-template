@@ -60,3 +60,19 @@ body {
         font-weight: bold;
     }
 }
+
+//单行文本溢出显示省略号
+.text-ellipsis-1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+// 两行文本溢出显示省略号
+.text-ellipsis-2 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
