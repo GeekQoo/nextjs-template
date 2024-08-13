@@ -157,6 +157,7 @@ export const LayoutFooter: React.FC<{ theme?: "light" | "dark"; settings: Settin
                                 <div className="ml-1"> {getValueByKey(settings, "gongan")}</div>
                             </div>
                         </Link>
+                        <div className=" block text-14px c-#fff">本项目所有图片和文案均来自互联网</div>
                     </Space>
                 </div>
             </div>

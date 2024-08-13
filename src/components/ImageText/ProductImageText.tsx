@@ -4,13 +4,17 @@ import type { PaginationResProps } from "#/request";
 import { Card, Col, Row } from "antd";
 
 interface Props {
-    // 公用属性
     className?: string;
     title?: string;
+    categoryId?: number;
 }
 
-export const ProductImageText: React.FC<Props> = async ({ title, className }) => {
-    const postRes = await GET_POST_LIST<PaginationResProps<PostProps>>({ page: 1, size: 2 });
+export const ProductImageText: React.FC<Props> = async ({ title, className, categoryId }) => {
+    const postRes = await GET_POST_LIST<PaginationResProps<PostProps>>({
+        page: 1,
+        size: 2,
+        categoryId: categoryId ?? null
+    });
     const postList = postRes.data.data?.list ?? [];
 
     return (

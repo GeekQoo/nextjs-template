@@ -10,7 +10,7 @@ const Home: React.FC = async () => {
     return (
         <div>
             {banners && banners.length > 0 && <CommonBanner banners={banners} />}
-            <ProductImageText />
+            <ProductImageText categoryId={13} />
             <CommonImageText className="bg-#fff" postId={7} />
             <CommonImageText postId={8} />
         </div>
