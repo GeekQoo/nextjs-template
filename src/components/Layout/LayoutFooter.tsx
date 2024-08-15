@@ -56,7 +56,7 @@ export const LayoutFooter: React.FC<{ theme?: "light" | "dark"; settings: Settin
                                         src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
                                     />
                                 </div>
-                                <div className="mt-2 text-20px">Next.js template</div>
+                                <div className="mt-2 text-20px text-center">Next.js template</div>
                             </div>
                         </div>
                     </Col>
