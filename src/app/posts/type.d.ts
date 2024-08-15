@@ -14,3 +14,7 @@ export interface PostProps {
         tagName: string;
     }[];
 }
+
+export interface PostsCategoryProps {
+    categoryName: string;
+}

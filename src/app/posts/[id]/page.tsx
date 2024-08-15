@@ -3,15 +3,17 @@ import type { PostProps } from "@/app/posts/type";
 import { Card, Divider, Space, Tag } from "antd";
 import dayjs from "dayjs";
 import { GET_POST_BY_ID } from "@/api/posts";
+import type { Metadata } from "next";
 
 const getPostRes = async (params: { id: number }) => {
     const res = await GET_POST_BY_ID<PostProps>(params);
-    if (res.data.code === 0 && res.data.data) {
-        return res.data.data;
-    } else {
-        return null;
-    }
+    return res.data.code === 0 && res.data.data ? res.data.data : null;
 };
+
+export async function generateMetadata({ params }: RouteParamsProps<{ id: string }>): Promise<Metadata> {
+    const postRes = await getPostRes({ id: Number(params.id) });
+    return { title: postRes?.title, description: postRes?.summary };
+}
 
 const PostDetail: React.FC<RouteParamsProps<{ id: string }>> = async ({ params }) => {
     const postRes = await getPostRes({ id: Number(params.id) });

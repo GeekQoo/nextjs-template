@@ -2,24 +2,39 @@ import type { Metadata } from "next";
 import { Button, Card, Space, Tag } from "antd";
 import Link from "next/link";
 import type { PaginationResProps } from "#/request";
-import type { SearchParamsProps } from "#/global";
-import type { PostProps } from "@/app/posts/type";
+import { PageParamsProps, type RouteParamsProps } from "#/global";
+import { PostProps, PostsCategoryProps } from "@/app/posts/type";
 import dayjs from "dayjs";
-import { GET_POST_LIST } from "@/api/posts";
+import { GET_CATEGORY_BY_ID, GET_POST_LIST } from "@/api/posts";
 
-export const metadata: Metadata = {
-    title: "文章列表",
-    description: "一个Next.js快速启动模板"
-};
-
-const getPostRes = async ({ page = 1, size = 10 }) => {
-    const res = await GET_POST_LIST<PaginationResProps<PostProps>>({ page, size });
+// 获取文章数据
+const getPostRes = async ({
+    page = 1,
+    size = 10,
+    categoryId
+}: {
+    page: number;
+    size: number;
+    categoryId: number | null;
+}) => {
+    const res = await GET_POST_LIST<PaginationResProps<PostProps>>({ page, size, categoryId });
     return res.data.code === 0 && res.data.data ? res.data.data : null;
 };
 
-const Posts: React.FC<SearchParamsProps<{ page: number }>> = async ({ searchParams }) => {
+// 查询文章分类信息
+const getCategoryRes = async (params: { id: number }) => {
+    const res = await GET_CATEGORY_BY_ID<PostsCategoryProps>(params);
+    return res.data.code === 0 && res.data.data ? res.data.data : null;
+};
+
+export async function generateMetadata({ params }: RouteParamsProps<{ id: string }>): Promise<Metadata> {
+    const categoryRes = await getCategoryRes({ id: Number(params.id) });
+    return { title: categoryRes?.categoryName };
+}
+
+const PostsCategory: React.FC<PageParamsProps<{ id: string }, { page: number }>> = async ({ searchParams, params }) => {
     const page = searchParams.page || 1;
-    const postRes = await getPostRes({ page, size: 10 });
+    const postRes = await getPostRes({ page, size: 10, categoryId: params.id ? Number(params.id) : null });
 
     if (!postRes) return <div className="page-container py">请求异常，请刷新后重试</div>;
 
@@ -105,4 +120,4 @@ const Posts: React.FC<SearchParamsProps<{ page: number }>> = async ({ searchPara
     );
 };
 
-export default Posts;
+export default PostsCategory;
