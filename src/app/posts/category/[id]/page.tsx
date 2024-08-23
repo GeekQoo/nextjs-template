@@ -66,7 +66,7 @@ const PostsCategory: React.FC<PageParamsProps<{ id: string }, { page: number }>>
                                 <img className="block wh-100%  object-cover" src={item.thumbnail} />
                             </Link>
                         )}
-                        <div className="relative">
+                        <div className="relative flex-1">
                             <Link href={`/posts/${item.id}`} className="text-20px c-#333">
                                 {item.title}
                             </Link>

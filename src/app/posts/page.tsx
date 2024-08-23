@@ -45,13 +45,13 @@ const Posts: React.FC<SearchParamsProps<{ page: number }>> = async ({ searchPara
         <div className="page-container py">
             {(postRes.list ?? []).map((item, index) => (
                 <Card hoverable className="mb!" key={index}>
-                    <div className="flex ">
+                    <div className="flex">
                         {item.thumbnail && (
                             <Link href={`/posts/${item.id}`} className="block mr flex-fixed-320 h-180px">
                                 <img className="block wh-100%  object-cover" src={item.thumbnail} />
                             </Link>
                         )}
-                        <div className="relative">
+                        <div className="relative flex-1">
                             <Link href={`/posts/${item.id}`} className="text-20px c-#333">
                                 {item.title}
                             </Link>
